@@ -485,15 +485,19 @@ def evaluate(index_base,
             #    assert num_cases == num_fragment
 
             print >> sys.stderr, "\t\t%s" % rank
-            print >> sys.stderr, "\t\t\tsensitivity: {:,} / {:,} ({:.2%})".format(classified, num_cases, float(classified) / num_cases)
-            print >> sys.stderr, "\t\t\tprecision  : {:,} / {:,} ({:.2%})".format(classified, raw_classified, float(classified) / raw_classified)
+            print >> sys.stderr, "\t\t\tsensitivity: {:,} / {:,} ({:.2%})".format(classified, num_cases,
+                    float(classified) / num_cases if num_cases != 0 else 0)
+            print >> sys.stderr, "\t\t\tprecision  : {:,} / {:,} ({:.2%})".format(classified, raw_classified,
+                    float(classified) / raw_classified if raw_classified != 0 else 0)
             print >> sys.stderr, "\n\t\t\tfor uniquely classified ",
             if paired:
                 print >> sys.stderr, "pairs"
             else:
                 print >> sys.stderr, "reads"
-            print >> sys.stderr, "\t\t\t\t\tsensitivity: {:,} / {:,} ({:.2%})".format(unique_classified, num_cases, float(unique_classified) / num_cases)
-            print >> sys.stderr, "\t\t\t\t\tprecision  : {:,} / {:,} ({:.2%})".format(unique_classified, raw_unique_classified, float(unique_classified) / raw_unique_classified)
+            print >> sys.stderr, "\t\t\t\t\tsensitivity: {:,} / {:,} ({:.2%})".format(unique_classified, num_cases,
+                    float(unique_classified) / num_cases if num_cases != 0 else 0)
+            print >> sys.stderr, "\t\t\t\t\tprecision  : {:,} / {:,} ({:.2%})".format(unique_classified, raw_unique_classified,
+                    float(unique_classified) / raw_unique_classified if raw_unique_classified != 0 else 0)
 
             # Calculate sum of squared residuals in abundance
             if rank == "strain":
